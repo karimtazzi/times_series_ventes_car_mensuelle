@@ -1,0 +1,172 @@
+
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R est un logiciel libre livré sans AUCUNE GARANTIE.
+Vous pouvez le redistribuer sous certaines conditions.
+Tapez 'license()' ou 'licence()' pour plus de détails.
+
+R est un projet collaboratif avec de nombreux contributeurs.
+Tapez 'contributors()' pour plus d'information et
+'citation()' pour la façon de le citer dans les publications.
+
+Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
+en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
+Tapez 'q()' pour quitter R.
+
+[Sauvegarde de la session précédente restaurée]
+
+> ###importaton des données sous rstudio###
+> data_sales=read.table("total_sales_usa_monthly.txt")
+Erreur dans file(file, "rt") : impossible d'ouvrir la connexion
+De plus : Message d'avis :
+Dans file(file, "rt") :
+  impossible d'ouvrir le fichier 'total_sales_usa_monthly.txt' : No such file or directory
+> 
+> ###division de dataset:apprentisage et validation###
+> data_sales_apprentisage=data_sales[1:468,1:2]
+> data_sales_validation=data_sales[469:528,1:2]
+> 
+> ###Creation de la serie temporelle ###
+> series_sales_cars=ts(data_sales_apprentisage$V2,frequency =12,start =c(1976,01))
+> 
+> ###Representation graphique de la serie###
+> plot(series_sales_cars)
+> OR
+Erreur : objet 'OR' introuvable
+> require(itsmr)
+Le chargement a nécessité le package : itsmr
+> plotc(series_sales_cars)
+> 
+> ###décomposition de la serie (trend,sesoneal,risidual)###
+> series_sales_carscomponents=decompose(series_sales_cars)
+> ###voire les valeurs saisoniaire de la série###
+> series_sales_carscomponents$seasonal
+            Jan        Feb        Mar        Apr        May        Jun
+1976 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1977 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1978 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1979 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1980 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1981 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1982 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1983 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1984 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1985 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1986 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1987 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1988 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1989 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1990 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1991 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1992 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1993 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1994 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1995 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1996 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1997 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1998 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+1999 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2000 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2001 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2002 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2003 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2004 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2005 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2006 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2007 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2008 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2009 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2010 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2011 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2012 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2013 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+2014 -216.38516  -96.92972  141.90318   42.66253  150.14541  118.64246
+            Jul        Aug        Sep        Oct        Nov        Dec
+1976   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1977   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1978   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1979   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1980   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1981   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1982   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1983   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1984   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1985   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1986   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1987   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1988   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1989   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1990   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1991   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1992   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1993   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1994   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1995   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1996   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1997   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1998   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+1999   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2000   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2001   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2002   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2003   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2004   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2005   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2006   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2007   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2008   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2009   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2010   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2011   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2012   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2013   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+2014   42.24754   59.59279  -42.17727  -31.95677 -127.89295  -39.85203
+> 
+> ###representation graphique des composantes de la serie###
+> plot(series_sales_carscomponents)
+> 
+> ###Corrélogrammes simple et partiel###
+> acf(series_sales_cars,lag.max=40)
+> pacf(series_sales_cars,lag.max=40)
+> 
+> ### test de dickey Fuller de notre serie (test de stationnarité)###
+> adf.test(series_sales_cars)
+Erreur dans adf.test(series_sales_cars) : 
+  impossible de trouver la fonction "adf.test"
+> 
+> ### différentiation d'ordre 1 de la série afin de la rendre stationnaire###
+> sales_data_diff1 <- diff(series_sales_cars, differences=1)
+> 
+> ###Visualisation graphique de la serie differentier###
+> plot(sales_data_diff1)
+> 
+> ###Corrélogrammes simple et partiel de la série différentier###
+> acf(sales_data_diff1,lag.max=36)
+> pacf(sales_data_diff1,lag.max=36)
+> 
+> ###identification de modéle & estimation des coefficients correspondant###
+> auto.arima(series_sales_cars,d=1,stepwise = FALSE,approximation = FALSE,trace = TRUE)
+Erreur dans auto.arima(series_sales_cars, d = 1, stepwise = FALSE, approximation = FALSE,  : 
+  impossible de trouver la fonction "auto.arima"
+> 
+> ### visualisation des résidus pour valider le modéle###
+> fitt_arima=auto.arima(series_sales_cars,d=1,stepwise = FALSE,approximation = FALSE,trace = TRUE)
+Erreur dans auto.arima(series_sales_cars, d = 1, stepwise = FALSE, approximation = FALSE,  : 
+  impossible de trouver la fonction "auto.arima"
+> checkresiduals(fitt_arima)
+Erreur dans checkresiduals(fitt_arima) : 
+  impossible de trouver la fonction "checkresiduals"
+> 
+> ###La prévision de 5ans (h=60/12=5)###
+> prev=forecast(fitt_arima,h=60)
+Erreur dans .forecast.transform(x, M, a, h, 1) : 
+  l'argument "M" est manquant, avec aucune valeur par défaut
+> 
+> ###presentation graphique des prévisions###
+> autoplot(prev) 
+Erreur dans autoplot(prev) : impossible de trouver la fonction "autoplot"
+> 
+> ###afficher les valeurs des prévision###
+> summary(prev)
